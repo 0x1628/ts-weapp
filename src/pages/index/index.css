@@ -1,0 +1,6 @@
+@import '../../var.config.css';
+
+.container {
+  background: var(--blue);
+  color: #ccc;
+}
