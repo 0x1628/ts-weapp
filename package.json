@@ -1,0 +1,31 @@
+{
+  "name": "ts-weapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently 'npm:watch-js' 'npm:watch-css' 'npm:watch-other'",
+    "watch-js": "tsc -w",
+    "watch-css": "postcss src/**/*.css --base src --dir dist --ext wxss --watch",
+    "watch-other": "node scripts/cpx.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^10.5.4",
+    "concurrently": "^3.6.1",
+    "cpx": "^1.5.0",
+    "postcss-apply": "^0.10.0",
+    "postcss-calc": "^6.0.1",
+    "postcss-cli": "^6.0.0",
+    "postcss-custom-media": "^6.0.0",
+    "postcss-custom-properties": "^7.0.0",
+    "postcss-custom-selectors": "^4.0.1",
+    "postcss-import": "^11.1.0",
+    "postcss-media-minmax": "^3.0.0",
+    "postcss-nesting": "^6.0.0",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
+  }
+}
