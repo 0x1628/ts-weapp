@@ -27,13 +27,11 @@ interface AppLaunchShowFuncOpts {
   referrerInfo: AppReferrerInfo;
 }
 
-type AppLaunchShowFunc = (options: AppLaunchShowFuncOpts) => void;
-
 interface AppOpts {
-  onLaunch?: AppLaunchShowFunc;
-  onShow?: AppLaunchShowFunc;
-  onHide?: ZeroParamVoidFunc;
-  onError?: (msg: string) => void;
+  onLaunch?(options: AppLaunchShowFuncOpts): void;
+  onShow?(options: AppLaunchShowFuncOpts): void;
+  onHide?(): void;
+  onError?(msg: string): void;
 
   [key: string]: any;
 }
@@ -44,16 +42,16 @@ interface IApp extends AppOpts {}
 
 interface PageOpts<Data = {}> {
   data?: Data;
-  onLoad?: (options: string2stringMap) => void;
-  onReady?: ZeroParamVoidFunc;
-  onShow?: ZeroParamVoidFunc;
-  onHide?: ZeroParamVoidFunc;
-  onUnload?: ZeroParamVoidFunc;
-  onPullDownRefresh?: ZeroParamVoidFunc;
-  onReachBottom?: ZeroParamVoidFunc;
-  onShareAppMessage?: ZeroParamVoidFunc;
-  onPageScroll?: ZeroParamVoidFunc;
-  onTabItemTap?: (item: any) => void;
+  onLoad?(options: string2stringMap): void;
+  onReady?(): void;
+  onShow?(): void;
+  onHide?(): void;
+  onUnload?(): void;
+  onPullDownRefresh?(): void;
+  onReachBottom?(): void;
+  onShareAppMessage?(): void;
+  onPageScroll?(): void;
+  onTabItemTap?(item: any): void;
 
   [key: string]: any;
 }

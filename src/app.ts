@@ -45,8 +45,8 @@ const store = createStore({
     })*/
 
 
+App(enhance(store, new class extends AppComponent<typeof Actions> {
+  onLaunch() {
 
-App(enhance(store, new class extends AppComponent<typeof Actions> implements AppOpts {
-  onLaunch = () => {
   }
 }))

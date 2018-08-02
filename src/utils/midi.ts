@@ -98,15 +98,16 @@ interface Store<MidiModel, ActionMap> {
   setState(state: MidiModel): void
   dispatch(at: ActionType): Promise<any>
 }
-export class AppComponent<C extends WrappedActionMap> {
-  actions: C = <C>{}
-  getState(): MidiModel {
-    return {}
-  }
+
+export interface AppComponent<C extends WrappedActionMap> extends AppOpts {}
+export declare class AppComponent<C extends WrappedActionMap> {
+  actions: C
+  getState(): MidiModel
 }
-export class PageComponent<C extends WrappedActionMap, T> {
-  actions: C = <C>{}
-  data:T = <T>{}
+export interface PageComponent<T, C extends WrappedActionMap> extends PageOpts {}
+export declare class PageComponent<T, C extends WrappedActionMap> {
+  actions: C
+  data:T
 }
 
 interface ActionType {
@@ -178,7 +179,7 @@ interface mapStateToData<T extends MidiModel> {
   (state: T, props?: any, cachedData?: any): {[key: string]: any}
 }
 
-function inject(mapStateToData: mapStateToData<any>, page: PageComponent<WrappedActionMap, any>): PageOpts {
+function inject(mapStateToData: mapStateToData<any>, page: PageComponent<any, WrappedActionMap>): PageOpts {
   return {
     ...page,
     actions: store.actions,
