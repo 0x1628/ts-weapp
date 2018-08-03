@@ -1627,5 +1627,6 @@ declare let canvasContext: canvasContextApi;
 
 declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
+declare function Component(any): void;
 declare function getApp(): IApp;
 declare function getCurrentPages(): IPage[];

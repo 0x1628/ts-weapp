@@ -100,14 +100,15 @@ interface Store<MidiModel, ActionMap> {
 }
 
 export interface AppComponent<C extends WrappedActionMap> extends AppOpts {}
-export declare class AppComponent<C extends WrappedActionMap> {
-  actions: C
-  getState(): MidiModel
+export class AppComponent<C extends WrappedActionMap> {
+  actions: C = <C>{}
+  getState(): MidiModel { return {} }
 }
 export interface PageComponent<T, C extends WrappedActionMap> extends PageOpts {}
-export declare class PageComponent<T, C extends WrappedActionMap> {
-  actions: C
-  data:T
+export class PageComponent<T, C extends WrappedActionMap> {
+  actions: C = <C>{}
+  data:T = <T>{}
+  setData(data: T, callback?: () => any) : void {}
 }
 
 interface ActionType {
