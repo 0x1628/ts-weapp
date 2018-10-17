@@ -4,7 +4,10 @@ const base = 'REPLACE_YOUR_URL_BASE'
 
 const ekey = 'REPLACE_YOUR_SECRET_KEY'
 
-const dekey = String.fromCharCode.apply(null, ekey.split('').map(i => i.charCodeAt(0)).map((i, index) => i - index))
+const dekey = String.fromCharCode
+  .apply(undefined, ekey.split('')
+  .map(i => i.charCodeAt(0))
+  .map((i, index) => i - index))
 
 type ReqOpt = {
     full?: boolean,
@@ -20,8 +23,10 @@ export default function (options: NetworkRequestOpts, reqOpt: ReqOpt = {}): Prom
         if (app && app.midiState && app.midiState.token && !data.token) {
           data.token = app.midiState.token
         }
-      } catch (e) {}
-      data.rk = Date.now().toString() + Math.floor(Math.random() * 10000)
+      } catch (e) {
+        // nothing
+      }
+      data.rk = `${Date.now()}${Math.floor(Math.random() * 10000)}`
       const str = Object.keys(data).sort().map(k => {
         let value = data[k]
         if (typeof value === 'object') {
@@ -47,6 +52,7 @@ export default function (options: NetworkRequestOpts, reqOpt: ReqOpt = {}): Prom
           return
         }
         let {data: sdata} = res
+        // tslint:disable-next-line
         if (typeof sdata === 'string') {
           try {
             sdata = JSON.parse(sdata)
@@ -54,6 +60,7 @@ export default function (options: NetworkRequestOpts, reqOpt: ReqOpt = {}): Prom
             sdata = {}
           }
         }
+        // eslint
         const header = <{[key: string]: any}>{}
         Object.keys(res.header).forEach(key => {
           const value = res.header[key]

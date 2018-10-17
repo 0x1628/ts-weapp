@@ -1,11 +1,11 @@
-let store: Store<MidiModel, ActionMap>
+let store: Store
 const STORE_CHANGE_KEY = 'storechange'
 
 function isPromise(target: any): boolean {
   return (target && typeof target.then === 'function') || false
 }
 
-function shallowEqual(o1: object, o2: object) {
+function shallowEqual(o1: object, o2: object): boolean {
   const k1 = Object.keys(o1)
   const k2 = Object.keys(o2)
 
@@ -23,23 +23,22 @@ function shallowEqual(o1: object, o2: object) {
   })
 }
 
-function omit<T>(o: T, names: string): Partial<T>
-function omit<T>(o: T, names: string[]): Partial<T>
-function omit<T>(o: T, names: any) {
+function omit<T>(o: T, names: string | string[]): Partial<T> {
   if (typeof names === 'string') {
     names = [names]
   }
   return Object.getOwnPropertyNames(o).reduce((target: any, key) => {
-    if (!names.includes(key)) {
+    if (names.indexOf(key) === -1) {
       target[key] = (<any>o)[key]
     }
     return target
+  // tslint:disable-next-line
   }, <T>{})
 }
 
 function getValueByNamespace(target: any, namespace: string): any {
   const namespaceArr = namespace.split('.')
-  let result: any = null
+  let result: any
   while (target && namespaceArr.length) {
     const key = <string>namespaceArr.shift()
     target = result = target[key]
@@ -69,19 +68,19 @@ namespace EventEmitter {
 
   const listeners: {[key: string]: Callback[]} = {}
 
-  export function addEventListener(name: string, callback: Callback) {
+  export function addEventListener(name: string, callback: Callback): void {
     if (!listeners[name]) {
       listeners[name] = []
     }
     listeners[name].push(callback)
   }
 
-  export function removeEventListener(name: string, callback: Callback) {
+  export function removeEventListener(name: string, callback: Callback): void {
     if (!listeners[name]) return
     listeners[name] = listeners[name].filter(it => it !== callback)
   }
 
-  export function dispatchEvent(name: string, ...rest: any[]) {
+  export function dispatchEvent(name: string, ...rest: any[]): void {
     if (!listeners[name]) return
     listeners[name].forEach(it => it(...rest))
   }
@@ -108,7 +107,7 @@ type WrappedActionAny = (...args: any[]) => Promise<any>
 type ActionMap = {[key: string]: ActionAny}
 type WrappedActionMap = {[key: string]: WrappedActionAny}
 
-interface Store<MidiModel, ActionMap> {
+interface Store {
   state: MidiModel,
   actions: ActionMap,
   getState(): MidiModel
@@ -116,18 +115,21 @@ interface Store<MidiModel, ActionMap> {
   dispatch(at: ActionType): Promise<any>
 }
 
+// tslint:disable-next-line
 interface AppComponent<C extends WrappedActionMap> extends AppOpts {}
 class AppComponent<C extends WrappedActionMap> {
-  actions: C = <C>{}
+  // tslint:disable-next-line
+  public actions: C = <C>{}
   getState(): MidiModel { return {} }
 }
 interface PageClass<T, C extends WrappedActionMap = {}> extends PageOpts {
   getInitialData?(): Partial<T>
 }
 class PageClass<T, C extends WrappedActionMap = {}> {
-  actions: C = <C>{}
-  data = <T>{}
-  setData(data: Partial<T>, callback?: () => any): void {}
+  // tslint:disable-next-line
+  public actions: C = <C>{}
+  // tslint:disable-next-line
+  public data = <T>{}
   constructor() {
     if (this.getInitialData) {
       this.data = <T>this.getInitialData()
@@ -138,12 +140,15 @@ class PageClass<T, C extends WrappedActionMap = {}> {
       (<any>this)[method] = this.constructor.prototype[method]
     })
   }
+  setData(data: Partial<T>, callback?: () => any): void {
+    // nothing
+  }
 }
 
 type PropertyDefinition = {
   type: any
   value: any,
-  observer?: () => void
+  observer?(): void
 }
 
 interface ComponentClass<T, P = {}> {
@@ -155,15 +160,13 @@ interface ComponentClass<T, P = {}> {
   detached?(): void
 }
 class ComponentClass<T, P = {}> {
-  setData(data: Partial<T>): void {}
-  properties = <P>{}
-  data = <T>{}
-  methods: {[key: string]: any} = {}
 
-  static reserved = ['attached', 'ready', 'moved', 'detached']
-  transformProperties(arg: any): P {
-    return <P>arg
-  }
+  static reserved: string[] = ['attached', 'ready', 'moved', 'detached']
+  // tslint:disable-next-line
+  public properties = <P>{}
+  // tslint:disable-next-line
+  public data = <T>{}
+  methods: {[key: string]: any} = {}
 
   constructor() {
     if (this.getInitialData) {
@@ -173,7 +176,8 @@ class ComponentClass<T, P = {}> {
       this.properties = this.transformProperties(this.getPropertiesDefinition())
     }
     Object.getOwnPropertyNames(this.constructor.prototype).forEach((method: string) => {
-      if (['constructor', 'transformProperties', 'getInitialData', 'getPropertiesDefinition'].indexOf(method) !== -1) return
+      if (['constructor', 'transformProperties', 'getInitialData',
+        'getPropertiesDefinition'].indexOf(method) !== -1) return
 
       if (ComponentClass.reserved.indexOf(method) !== -1) {
         (<any>this)[method] = this.constructor.prototype[method]
@@ -183,6 +187,12 @@ class ComponentClass<T, P = {}> {
       this.methods[method] = this.constructor.prototype[method]
     })
   }
+  setData(data: Partial<T>): void {
+    // nothing
+  }
+  transformProperties(arg: any): P {
+    return <P>arg
+  }
 }
 
 interface ActionType {
@@ -191,9 +201,10 @@ interface ActionType {
   params: any[],
 }
 
-function createStore(state: MidiModel, actions: WrappedActionMap): Store<MidiModel, ActionMap> {
+/* tslint:disable:no-invalid-this */
+function createStore(initState: MidiModel, actions: WrappedActionMap): Store {
   store = {
-    state,
+    state: initState,
     actions,
     getState() {
       return this.state
@@ -201,7 +212,7 @@ function createStore(state: MidiModel, actions: WrappedActionMap): Store<MidiMod
     setState(state: MidiModel) {
       this.state = state
     },
-    dispatch(actionType) {
+    dispatch(actionType: ActionType) {
       let state = this.getState()
       if (actionType.namespace) {
         state = getValueByNamespace(state, actionType.namespace)
@@ -231,7 +242,9 @@ function createStore(state: MidiModel, actions: WrappedActionMap): Store<MidiMod
   }
   return store
 }
+/* tslint:enable */
 
+/* tslint:disable:max-line-length */
 function createAction(action: Action0): WrappedAction0
 function createAction<T1>(action: Action1<T1>): WrappedAction1<T1>
 function createAction<T1, T2>(action: Action2<T1, T2>): WrappedAction2<T1, T2>
@@ -240,13 +253,16 @@ function createAction<T1, T2, T3, T4>(action: Action4<T1, T2, T3, T4>): WrappedA
 function createAction(action: ActionAny): WrappedActionAny {
   return (...args: any[]) => {
     return store.dispatch({
+      // tslint:disable-next-line
       namespace: null,
       action,
       params: args,
     })
   }
 }
+/* tslint:enable */
 
+/* tslint:disable:max-line-length */
 function createPartialAction(namespace: string, action: Action0): WrappedAction0
 function createPartialAction<T1>(namespace: string, action: Action1<T1>): WrappedAction1<T1>
 function createPartialAction<T1, T2>(namespace: string, action: Action2<T1, T2>): WrappedAction2<T1, T2>
@@ -261,24 +277,26 @@ function createPartialAction(namespace: string, action: ActionAny): WrappedActio
     })
   }
 }
+/* tslint:enable */
 
-function enhance(store: Store<MidiModel, ActionMap>, app: AppComponent<WrappedActionMap>): AppOpts {
-  app.getState = () => store.getState()
-  app.getStore = () => store
-  app.actions = store.actions
+function enhance(initStore: Store, app: AppComponent<WrappedActionMap>): AppOpts {
+  app.getState = () => initStore.getState()
+  app.getStore = () => initStore
+  app.actions = initStore.actions
   return {
     ...omit(app.constructor.prototype, ['constructor', '__proto__']),
     ...app,
   }
 }
-type mapStateToData<T extends MidiModel> =
+type MapStateToData<T extends MidiModel> =
   (state: T, props?: any, cachedData?: any) => {[key: string]: any}
 
-function inject(mapStateToData: mapStateToData<any>, page: PageClass<any, WrappedActionMap>): PageOpts {
+/* tslint:disable:no-invalid-this no-unbound-method */
+function inject(mapStateToData: MapStateToData<any>, page: PageClass<any, WrappedActionMap>): PageOpts {
   return {
     ...page,
     actions: store.actions,
-    onLoad(props) {
+    onLoad(props: any) {
       this.cachedProps = props || {}
       this.cachedData = this.data || {}
       this._checkData()

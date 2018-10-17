@@ -5,10 +5,11 @@ type Data = {
 }
 
 Page(new class extends PageClass<Data> {
-  data = {
+  data: Data = {
     name: 'fragment0',
   }
   onLoad() {
+    // tslint:disable-next-line
     console.log('Onload')
   }
-})
+}())
