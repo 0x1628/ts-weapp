@@ -13,13 +13,13 @@ type ReqOpt = {
     full?: boolean,
 }
 
-export default function (options: NetworkRequestOpts, reqOpt: ReqOpt = {}): Promise<any> {
+export default function (options: wx.RequestOption, reqOpt: ReqOpt = {}): Promise<any> {
   return new Promise((resolve, reject) => {
-    const {data} = options
+    const data: any = options.data
 
     if (options.method && options.method.toLowerCase() !== 'get' && data) {
       try {
-        const app = getApp()
+        const app: any = getApp()
         if (app && app.midiState && app.midiState.token && !data.token) {
           data.token = app.midiState.token
         }

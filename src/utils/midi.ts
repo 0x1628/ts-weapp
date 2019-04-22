@@ -116,13 +116,14 @@ interface Store {
 }
 
 // tslint:disable-next-line
-interface AppComponent<C extends WrappedActionMap> extends AppOpts {}
+interface AppComponent<C extends WrappedActionMap> extends App.AppInstance {}
 class AppComponent<C extends WrappedActionMap> {
   // tslint:disable-next-line
   public actions: C = <C>{}
   getState(): MidiModel { return {} }
+  getStore(): any { return undefined }
 }
-interface PageClass<T, C extends WrappedActionMap = {}> extends PageOpts {
+interface PageClass<T, C extends WrappedActionMap = {}> extends Page.PageInstance {
   getInitialData?(): Partial<T>
 }
 class PageClass<T, C extends WrappedActionMap = {}> {
@@ -141,6 +142,9 @@ class PageClass<T, C extends WrappedActionMap = {}> {
     })
   }
   setData(data: Partial<T>, callback?: () => any): void {
+    // nothing
+  }
+  onUpdate() {
     // nothing
   }
 }
@@ -279,7 +283,7 @@ function createPartialAction(namespace: string, action: ActionAny): WrappedActio
 }
 /* tslint:enable */
 
-function enhance(initStore: Store, app: AppComponent<WrappedActionMap>): AppOpts {
+function enhance(initStore: Store, app: AppComponent<WrappedActionMap>) {
   app.getState = () => initStore.getState()
   app.getStore = () => initStore
   app.actions = initStore.actions
@@ -292,7 +296,7 @@ type MapStateToData<T extends MidiModel> =
   (state: T, props?: any, cachedData?: any) => {[key: string]: any}
 
 /* tslint:disable:no-invalid-this no-unbound-method */
-function inject(mapStateToData: MapStateToData<any>, page: PageClass<any, WrappedActionMap>): PageOpts {
+function inject(mapStateToData: MapStateToData<any>, page: PageClass<any, WrappedActionMap>): any {
   return {
     ...page,
     actions: store.actions,
