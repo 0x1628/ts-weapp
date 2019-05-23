@@ -22,7 +22,8 @@ export declare type ConfigWildcard = Partial<ConfigBase> & {
     url: string;
 };
 export declare type Res = {
-    data: string2any | string;
+    data: string2any;
+    rawData?: string;
     status: number;
     headers: string2any;
 };
