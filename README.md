@@ -15,21 +15,13 @@ npm run dev
 
 辅助命令通过运行 scripts 文件夹下 `.js` 文件执行。
 
-### page
+### 根据模板创建 Page 或 Component
 
 ```
-node scripts/page.js YOUR_PAGE_NAME
+node scripts/add.js page | component NAME
 ```
 
-通过模板创建 page。注意不会修改 app.json，需要手动添加。
-
-### component
-
-```
-node scripts/component.js YOUR_COMPONENT_NAME
-```
-
-通过模板创建 component。
+通过模板创建 `page` 或 `component`，注意不会修改 app.json，需要手动添加。
 
 ## midi
 
