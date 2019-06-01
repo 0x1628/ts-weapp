@@ -8,7 +8,8 @@
     "watch-js": "tsc -w",
     "watch-css": "postcss src/**/*.css --base src --dir dist --ext wxss --watch",
     "watch-other": "node scripts/cpx.js",
-    "test": "tslint -p ."
+    "test": "tslint -p .",
+    "adds": "node scripts/add.js $1 $2"
   },
   "author": "",
   "license": "ISC",

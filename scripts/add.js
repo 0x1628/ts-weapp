@@ -31,7 +31,7 @@ function ensureFolder(target) {
 const Commands = {
   page(pageName) {
     if (!pageName) {
-      throw new Error('Must give page name')
+      throw new Error('Must given a page name')
     }
     const pageFolder = path.resolve(base, 'src', 'pages', pageName)
     ensureFolder(pageFolder).then(() => {
@@ -46,7 +46,7 @@ const Commands = {
   },
   component(componentName) {
     if (!componentName) {
-      throw new Error('Must give component name')
+      throw new Error('Must given a component name')
     }
     const componentFolder = path.resolve(base, 'src', 'components', componentName)
     ensureFolder(componentFolder).then(() => {
