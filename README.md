@@ -20,7 +20,7 @@ npm run dev
 ```
 # COMMAND 可选 page 或 component
 
-node scripts/add.js COMMAND NAME
+node scripts/add.js COMMAND PAGE_OR_COMPONENT_NAME
 ```
 
 通过模板创建 `page` 或 `component`。注意：添加 `page` 后请手动将新页面路径添加至 `app.json`。
