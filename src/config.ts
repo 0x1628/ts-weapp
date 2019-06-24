@@ -1,8 +1,16 @@
-export default {
+// 需要修改 env 变量
+const env = 'dev'
+
+const config = {
     dev: {
-        api: '',
+        api: 'https://dev',
     },
     prod: {
-        api: '',
+        api: 'https://prod',
     },
+}
+
+export default {
+    ...config[env],
+    ...config,
 }

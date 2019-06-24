@@ -1,3 +1,5 @@
+import config from './config'
+
 App({
     onLaunch(options: any) {
         // Do something initial when launch.
@@ -11,5 +13,7 @@ App({
     onError(msg: any) {
         console.log(msg)
     },
-    globalData: {},
+    globalData: {
+        config,
+    },
 })
