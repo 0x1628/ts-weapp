@@ -2,11 +2,61 @@
 
 基于 TypeScript 的微信小程序模板。
 
+## 目录结构
+```
+.
+├── README.md
+├── dist // 小程序目标产物目录
+├── lib
+│   ├── global.d.ts
+│   ├── templates // 暂且无用
+│   ├── wx
+│   │   ├── index.d.ts
+│   │   ├── lib.wx.api.d.ts
+│   │   ├── lib.wx.app.d.ts
+│   │   ├── lib.wx.cloud.d.ts
+│   │   └── lib.wx.page.d.ts
+│   └── wx.d.ts
+├── package.json
+├── postcss.config.js
+├── scripts
+│   ├── add.js
+│   └── cpx.js
+├── src
+│   ├── 3rd
+│   │   └── http.wx
+│   │       ├── Http.d.ts
+│   │       ├── agent.d.ts
+│   │       ├── base.d.ts
+│   │       ├── fake.d.ts
+│   │       ├── index.d.ts
+│   │       ├── index.js
+│   │       └── utils.d.ts
+│   ├── app.css
+│   ├── app.json
+│   ├── app.ts
+│   ├── components // 自建组件目录
+│   ├── config.ts // 配置文件
+│   ├── pages
+│   │   └── index // 示例页面目录
+│   │       ├── index.css
+│   │       ├── index.json
+│   │       ├── index.ts
+│   │       └── index.wxml
+│   ├── utils
+│   │   ├── md5.js
+│   │   ├── midi.ts
+│   │   └── request.ts
+│   └── var.config.css
+├── tsconfig.json
+└── tslint.json
+```
+
 ## 使用
 
 ```
 git clone https://github.com/fragment0/ts-weapp.git YOUR_PROJECT_NAME
-npm run dev
+npm run start
 ```
 
 使用微信开发者工具打开目录下 dist 文件夹即可预览。

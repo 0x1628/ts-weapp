@@ -26,6 +26,7 @@ export default function (options: Config): ReturnType<typeof http.request> {
     } catch (e) {
       // nothing
     }
+    // rk --> random key
     data.rk = `${Date.now()}${Math.floor(Math.random() * 10000)}`
     const str = Object.keys(data).sort().map(k => {
       let value = data[k]
@@ -34,6 +35,7 @@ export default function (options: Config): ReturnType<typeof http.request> {
       }
       return `${k}=${value}`
     }).concat(dekey).join('&')
+    // sk --> secret key
     data.sk = md5(str)
   }
 

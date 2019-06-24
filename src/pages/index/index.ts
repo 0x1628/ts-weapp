@@ -1,9 +1,11 @@
-import {PageClass} from '../../utils/midi'
+import { PageClass } from '../../utils/midi'
 import request from '../../utils/request'
 
 type Data = {
   name: String,
 }
+
+const app = getApp()
 
 Page(new class extends PageClass<Data> {
   data: Data = {
@@ -11,7 +13,7 @@ Page(new class extends PageClass<Data> {
   }
   onLoad() {
     // tslint:disable-next-line
-    console.log('Onload')
+    console.log('Onload', app)
     request({
       url: '/test',
     }).then(e => {

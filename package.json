@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently 'npm:watch-js' 'npm:watch-css' 'npm:watch-other'",
+    "start": "concurrently 'npm:watch-js' 'npm:watch-css' 'npm:watch-other'",
     "watch-js": "tsc -w",
-    "watch-css": "postcss src/**/*.css --base src --dir dist --ext wxss --watch",
+    "watch-css": "postcss src/**/*.css src/app.css --base src --dir dist --ext wxss --watch",
     "watch-other": "node scripts/cpx.js",
     "test": "tslint -p .",
     "adds": "node scripts/add.js $1 $2"
@@ -18,7 +18,7 @@
     "@types/node": "^10.5.4",
     "concurrently": "^3.6.1",
     "cpx": "^1.5.0",
-    "postcss-apply": "^0.10.0",
+    "postcss-apply": "^0.12.0",
     "postcss-calc": "^6.0.1",
     "postcss-cli": "^6.0.0",
     "postcss-custom-media": "^6.0.0",
