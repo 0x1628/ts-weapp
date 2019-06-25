@@ -54,14 +54,7 @@ const Commands = {
 
         let _pages = JSON.parse(JSON.stringify(pages))
 
-        _pages.forEach(pagePath => {
-            const isExist = dirs.includes(pagePath)
-            if (!isExist) {
-                _pages = _pages.filter(path => path !== pagePath)
-            }
-        })
-
-        appJSON.pages = _pages
+        appJSON.pages = _pages.filter(path => dirs.includes(path))
 
         fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify(appJSON), 'utf8')
     }
