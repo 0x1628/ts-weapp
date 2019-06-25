@@ -18,7 +18,10 @@ Page(
       request({
         url: '/test',
       }).then(e => {
-        console.log(e)
+      // tslint:disable-next-line: no-console
+        console.log('request success', e)
+      }).catch(e => {
+        console.error('request error', e)
       })
     }
   })(),
