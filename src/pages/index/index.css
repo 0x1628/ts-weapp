@@ -1,4 +1,4 @@
-@import '../../var.config.css';
+@import "../../var.config.css";
 
 .index {
   background: var(--blue);

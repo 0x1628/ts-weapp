@@ -152,7 +152,7 @@ class PageClass<T, C extends WrappedActionMap = {}> {
 type PropertyDefinition = {
   type: any
   value: any,
-  observer?(): void
+  observer?(): void,
 }
 
 interface ComponentClass<T, P = {}> {

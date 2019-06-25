@@ -6,19 +6,19 @@
 const env = 'dev'
 
 let config: any = {
-    dev: {
-        api: 'https://dev',
-        ekey: 'REPLACE_YOUR_SECRET_KEY',
-    },
-    prod: {
-        api: 'https://prod',
-        ekey: 'REPLACE_YOUR_SECRET_KEY',
-    },
+  dev: {
+    api: 'https://dev',
+    ekey: 'REPLACE_YOUR_SECRET_KEY',
+  },
+  prod: {
+    api: 'https://prod',
+    ekey: 'REPLACE_YOUR_SECRET_KEY',
+  },
 }
 
 config = {
-    ...config[env],
-    ...config,
+  ...config[env],
+  ...config,
 }
 
 // 移除不必要的属性
