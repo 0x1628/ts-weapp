@@ -10,12 +10,13 @@
 ├── dist // 小程序目标产物目录
 ├── lib
 │   ├── global.d.ts
-│   ├── templates // 暂且无用
+│   ├── templates // 模板页面/组件目录
 │   ├── wx
 │   │   ├── index.d.ts
 │   │   ├── lib.wx.api.d.ts
 │   │   ├── lib.wx.app.d.ts
 │   │   ├── lib.wx.cloud.d.ts
+│   │   ├── lib.wx.component.d.ts
 │   │   └── lib.wx.page.d.ts
 │   └── wx.d.ts
 ├── package.json

@@ -1,7 +1,20 @@
-import { ComponentClass } from "../../../src/utils/midi";
+import { ComponentClass } from '../../../src/utils/midi'
 
-type Data = {}
+/**
+ * 组件模板
+ * 注意：请手动修改组件名称，即将类名 CustomComponent 修改为你所需要的组件名称
+ */
 
-Component(new class extends ComponentClass<Data>{
+type Data = {
+    name: String,
+}
 
-})
+class CustomComponent extends ComponentClass<Data> {
+    options: any = {}
+
+    data: Data = {
+        name: '',
+    }
+}
+
+Component(new CustomComponent())

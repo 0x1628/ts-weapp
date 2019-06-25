@@ -79,7 +79,7 @@ if (commands.has(cmd)) {
 if (new Set(['--help', '-h']).has(cmd)) {
   console.log(`
     Usage
-      $ add <command>
+      $ adds <command>
 
     Available commands
       ${Array.from(commands).join(', ')}
