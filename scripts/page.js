@@ -18,7 +18,7 @@ const checkIsExist = pageName => {
     return Boolean(isExist)
 }
 
-const getDirs = _path => fs.readdirSync(_path).filter((file) => fs.statSync(path.resolve(_path, file)).isDirectory())
+const getDirs = dirPath => fs.readdirSync(dirPath).filter((file) => fs.statSync(path.resolve(dirPath, file)).isDirectory())
 
 const Commands = {
     /**
@@ -49,10 +49,8 @@ const Commands = {
      */
     loop() {
         const pageFolderPath = path.resolve(projectPath, 'src', 'pages')
-        let dirs = getDirs(pageFolderPath)
-        dirs = Array.from(dirs, dirName => `pages/${dirName}/${dirName}`)
-
-        let _pages = JSON.parse(JSON.stringify(pages))
+        const dirs = Array.from(getDirs(pageFolderPath), dirName => `pages/${dirName}/${dirName}`)
+        const _pages = JSON.parse(JSON.stringify(pages))
 
         appJSON.pages = _pages.filter(path => dirs.includes(path))
 

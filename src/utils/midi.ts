@@ -23,10 +23,7 @@ function shallowEqual(o1: object, o2: object): boolean {
   })
 }
 
-function omit<T>(o: T, names: string | string[]): Partial<T> {
-  if (typeof names === 'string') {
-    names = [names]
-  }
+function omit<T>(o: T, ...names: string[]): Partial<T> {
   return Object.getOwnPropertyNames(o).reduce((target: any, key) => {
     if (names.indexOf(key) === -1) {
       target[key] = (<any>o)[key]
@@ -150,7 +147,7 @@ class PageClass<T, C extends WrappedActionMap = {}> {
 }
 
 type PropertyDefinition = {
-  type: any
+  type: any,
   value: any,
   observer?(): void,
 }
@@ -288,7 +285,7 @@ function enhance(initStore: Store, app: AppComponent<WrappedActionMap>) {
   app.getStore = () => initStore
   app.actions = initStore.actions
   return {
-    ...omit(app.constructor.prototype, ['constructor', '__proto__']),
+    ...omit(app.constructor.prototype, 'constructor', '__proto__'),
     ...app,
   }
 }
@@ -345,4 +342,4 @@ function inject(mapStateToData: MapStateToData<any>, page: PageClass<any, Wrappe
   }
 }
 
-export {enhance, inject, createStore, createAction, createPartialAction, PageClass, ComponentClass, AppComponent}
+export {enhance, inject, createStore, createAction, createPartialAction, PageClass, ComponentClass, AppComponent, omit}

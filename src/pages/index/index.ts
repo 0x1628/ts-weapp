@@ -7,7 +7,7 @@ import {PageClass} from '../../utils/midi'
 import request from '../../utils/request'
 
 type Data = {
-  name: String;
+  name: String,
 }
 
 const app = getApp()
@@ -22,7 +22,7 @@ class Index extends PageClass<Data> {
     request({
       url: '/test',
     }).then(e => {
-    // tslint:disable-next-line: no-console
+      // tslint:disable-next-line: no-console
       console.log('request success', e)
     }).catch(e => {
       console.error('request error', e)

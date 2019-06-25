@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.2",
+	"libVersion": "2.2.1",
 	"appid": "wxaa6363f4c74e9880",
 	"projectname": "ts-weapp",
 	"debugOptions": {

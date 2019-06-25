@@ -2,6 +2,7 @@
  * 项目配置信息
  * 注意：需要修改 env 变量，可选值：env 或 prod
  */
+import { omit } from './utils/midi'
 
 const env = 'dev'
 
@@ -22,7 +23,6 @@ config = {
 }
 
 // 移除不必要的属性
-delete config.dev
-delete config.prod
+config = omit(config, 'dev', 'prod')
 
 export default config

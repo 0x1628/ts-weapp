@@ -100,8 +100,8 @@ npm run adds COMMAND PAGE_OR_COMPONENT_NAME
 
 ```javascript
 type Data = {
-  name: string
-  age: number
+  name: string,
+  age: number,
 }
 
 class IndexPage extends PageClass<Data> {
@@ -137,12 +137,12 @@ Page(new IndexPage)
 
 ```javascript
 type Data = {
-  name: string
-  color: string
+  name: string,
+  color: string,
 }
 
 type Properties = {
-  show: boolean
+  show: boolean,
 }
 
 class ButtonComponent extends ComponentClass<Data, Properties> {

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently 'npm:watch-js' 'npm:watch-css' 'npm:watch-other'",
     "watch-js": "tsc -w",
-    "watch-css": "postcss src/**/*.css src/app.css --base src --dir dist --ext wxss --watch",
+    "watch-css": "postcss src/**/*.css --base src --dir dist --ext wxss --watch",
     "watch-other": "node scripts/cpx.js",
     "test": "tslint -p .",
     "adds": "node scripts/add.js $1 $2"
@@ -33,7 +33,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tslint -p . --fix && node ./scripts/page loop"
+      "pre-commit": "tslint -p . && node ./scripts/page loop"
     }
   }
 }

@@ -6,7 +6,7 @@
 import { PageClass } from '../../utils/midi'
 
 type Data = {
-  name: String;
+  name: String,
 }
 
 class CustomPage extends PageClass<Data> {
