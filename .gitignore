@@ -17,4 +17,3 @@ pids
 
 # Optional npm cache directory
 .npm
-yarn.lock
