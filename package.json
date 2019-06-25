@@ -11,7 +11,7 @@
     "test": "tslint -p .",
     "adds": "node scripts/add.js $1 $2"
   },
-  "author": "",
+  "author": "fragment0",
   "license": "ISC",
   "devDependencies": {
     "@fragment0/tslint-config": "^0.1.1",
