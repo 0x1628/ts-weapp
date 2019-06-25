@@ -1,9 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-const appJSON = require('../src/app.json')
+const appJSONObject = require('../src/app.json')
 
-const pages = appJSON.pages
 const projectPath = process.cwd()
 
 /**
@@ -14,7 +13,7 @@ const checkIsExist = pageName => {
     // 检查是否存在于 app.json 文件
     if (!pageName) return true
 
-    const isExist = pages.find(path => path.endsWith('/' + pageName))
+    const isExist = appJSONObject.pages.find(path => path.endsWith('/' + pageName))
     return Boolean(isExist)
 }
 
@@ -28,8 +27,10 @@ const Commands = {
     add(pageName) {
         // 若不存在，则写入
         if (!checkIsExist(pageName)) {
-            pages.push(`pages/${pageName}/${pageName}`)
-            fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify(appJSON), 'utf8')
+            fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
+                ...appJSONObject,
+                pages: appJSONObject.pages.concat(`pages/${pageName}/${pageName}`)
+            }), 'utf8')
         }
     },
 
@@ -40,8 +41,10 @@ const Commands = {
     remove(pageName) {
         if (checkIsExist(pageName)) {
             // 页面存在于 app.json 文件
-            appJSON.pages = pages.filter(path => !path.endsWith('/' + pageName))
-            fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify(appJSON), 'utf8')
+            fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
+                ...appJSONObject,
+                pages: appJSONObject.pages.filter(path => !path.endsWith('/' + pageName))
+            }), 'utf8')
         }
     },
     /**
@@ -49,12 +52,12 @@ const Commands = {
      */
     loop() {
         const pageFolderPath = path.resolve(projectPath, 'src', 'pages')
-        const dirs = Array.from(getDirs(pageFolderPath), dirName => `pages/${dirName}/${dirName}`)
-        const _pages = JSON.parse(JSON.stringify(pages))
+        const dirs = getDirs(pageFolderPath).map(dirName => `pages/${dirName}/${dirName}`)
 
-        appJSON.pages = _pages.filter(path => dirs.includes(path))
-
-        fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify(appJSON), 'utf8')
+        fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
+            ...appJSONObject,
+            pages: Array.from(appJSONObject.pages).filter(path => dirs.includes(path))
+        }), 'utf8')
     }
 }
 
