@@ -33,7 +33,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tslint -p . --fix"
+      "pre-commit": "tslint -p . --fix && node ./scripts/page loop"
     }
   }
 }

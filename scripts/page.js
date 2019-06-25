@@ -1,4 +1,12 @@
 const fs = require('fs')
+const {
+    readdir,
+    stat
+} = require('fs')
+const {
+    join
+} = require('path')
+
 const appJSON = require('../src/app.json')
 
 const pages = appJSON.pages
@@ -13,6 +21,12 @@ const checkIsExist = pageName => {
 
     let isExist = pages.filter(path => path.endsWith('/' + pageName))
     return Boolean(isExist.length)
+}
+
+const getDirs = path => {
+    return fs.readdirSync(path).filter(function (file) {
+        return fs.statSync(path + '/' + file).isDirectory()
+    })
 }
 
 const Commands = {
@@ -39,12 +53,34 @@ const Commands = {
             appJSON.pages = pages.filter(path => !path.endsWith('/' + pageName))
             fs.writeFileSync(__dirname + '/../src/app.json', JSON.stringify(appJSON), 'utf8')
         }
+    },
+    /**
+     * 遍历 pages 目录并更新 app.json 文件
+     */
+    loop() {
+        const pageFolderPath = __dirname + '/../src/pages'
+        let dirs = getDirs(pageFolderPath)
+        dirs = dirs.map(dirName => `pages/${dirName}/${dirName}`)
+
+        let _pages = JSON.parse(JSON.stringify(pages))
+
+        _pages.forEach(pagePath => {
+            const isExist = dirs.includes(pagePath)
+            if (!isExist) {
+                _pages = _pages.filter(path => path !== pagePath)
+            }
+        })
+
+        appJSON.pages = _pages
+
+        fs.writeFileSync(__dirname + '/../src/app.json', JSON.stringify(appJSON), 'utf8')
     }
 }
 
 const commands = new Set([
     'add',
     'remove',
+    'loop'
 ])
 
 let cmd = process.argv[2]
