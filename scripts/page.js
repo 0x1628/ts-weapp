@@ -1,15 +1,10 @@
 const fs = require('fs')
-const {
-    readdir,
-    stat
-} = require('fs')
-const {
-    join
-} = require('path')
+const path = require('path')
 
 const appJSON = require('../src/app.json')
 
 const pages = appJSON.pages
+const projectPath = process.cwd()
 
 /**
  * 判断页面是否存在
@@ -19,15 +14,11 @@ const checkIsExist = pageName => {
     // 检查是否存在于 app.json 文件
     if (!pageName) return true
 
-    let isExist = pages.filter(path => path.endsWith('/' + pageName))
-    return Boolean(isExist.length)
+    const isExist = pages.find(path => path.endsWith('/' + pageName))
+    return Boolean(isExist)
 }
 
-const getDirs = path => {
-    return fs.readdirSync(path).filter(function (file) {
-        return fs.statSync(path + '/' + file).isDirectory()
-    })
-}
+const getDirs = _path => fs.readdirSync(_path).filter((file) => fs.statSync(path.resolve(_path, file)).isDirectory())
 
 const Commands = {
     /**
@@ -37,9 +28,8 @@ const Commands = {
     add(pageName) {
         // 若不存在，则写入
         if (!checkIsExist(pageName)) {
-            const path = `pages/${pageName}/${pageName}`
-            pages.push(path)
-            fs.writeFileSync(__dirname + '/../src/app.json', JSON.stringify(appJSON), 'utf8')
+            pages.push(`pages/${pageName}/${pageName}`)
+            fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify(appJSON), 'utf8')
         }
     },
 
@@ -51,16 +41,16 @@ const Commands = {
         if (checkIsExist(pageName)) {
             // 页面存在于 app.json 文件
             appJSON.pages = pages.filter(path => !path.endsWith('/' + pageName))
-            fs.writeFileSync(__dirname + '/../src/app.json', JSON.stringify(appJSON), 'utf8')
+            fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify(appJSON), 'utf8')
         }
     },
     /**
      * 遍历 pages 目录并更新 app.json 文件
      */
     loop() {
-        const pageFolderPath = __dirname + '/../src/pages'
+        const pageFolderPath = path.resolve(projectPath, 'src', 'pages')
         let dirs = getDirs(pageFolderPath)
-        dirs = dirs.map(dirName => `pages/${dirName}/${dirName}`)
+        dirs = Array.from(dirs, dirName => `pages/${dirName}/${dirName}`)
 
         let _pages = JSON.parse(JSON.stringify(pages))
 
@@ -73,7 +63,7 @@ const Commands = {
 
         appJSON.pages = _pages
 
-        fs.writeFileSync(__dirname + '/../src/app.json', JSON.stringify(appJSON), 'utf8')
+        fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify(appJSON), 'utf8')
     }
 }
 

@@ -1,6 +1,6 @@
 @import "../../var.config.css";
 
-.index {
+.page-index {
   background: var(--blue);
   color: #ccc;
 }
