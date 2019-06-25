@@ -1,4 +1,4 @@
 {
-  "pages": ["pages/index/index"],
-  "window": {}
+    "pages": ["pages/index/index"],
+    "window": {}
 }

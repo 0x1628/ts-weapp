@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const child_process = require('child_process')
 
 const base = process.cwd()
 
@@ -40,6 +41,14 @@ const Commands = {
       sourceFiles.forEach((source) => {
         const ext = source.split('.').pop()
         fs.copyFileSync(path.resolve(sourceFolder, source), path.resolve(pageFolder, `${pageName}.${ext}`))
+        // 追加 pageName 到 app.json
+        child_process.execFile('node', [__dirname + '/page.js', 'add', pageName], (error, stdout, stderr) => {
+          if (error) {
+            console.log('页面路径追加到 app.json 文件失败：', {
+              error, stdout, stderr
+            })   
+          }
+        })
       })
       console.log(`Add page ${pageName} success`)
     }).catch(e => console.error(e))
