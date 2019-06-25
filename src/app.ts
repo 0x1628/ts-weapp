@@ -11,7 +11,7 @@ App({
         // Do something when hide.
     },
     onError(msg: any) {
-        console.log(msg)
+        console.error(msg)
     },
     globalData: {
         config,

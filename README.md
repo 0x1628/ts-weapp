@@ -36,7 +36,7 @@
 │   ├── app.json
 │   ├── app.ts
 │   ├── components // 自建组件目录
-│   ├── config.ts // 配置文件
+│   ├── config.ts // 配置信息文件
 │   ├── pages
 │   │   └── index // 示例页面目录
 │   │       ├── index.css
@@ -47,7 +47,7 @@
 │   │   ├── md5.js
 │   │   ├── midi.ts
 │   │   └── request.ts
-│   └── var.config.css
+│   └── var.config.css // 全局样式表变量文件
 ├── tsconfig.json
 └── tslint.json
 ```
@@ -55,8 +55,15 @@
 ## 使用
 
 ```
-git clone https://github.com/fragment0/ts-weapp.git YOUR_PROJECT_NAME
-npm run start
+$ git clone https://github.com/fragment0/ts-weapp.git YOUR_PROJECT_NAME
+
+$ cd ./YOUR_PROJECT_NAME
+
+$ npm i
+
+# 按需修改 config.ts 文件中的配置信息
+
+$ npm run start
 ```
 
 使用微信开发者工具打开目录下 dist 文件夹即可预览。

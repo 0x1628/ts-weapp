@@ -1,14 +1,15 @@
 import {Config, http} from '../3rd/http.wx/index'
 import md5 from './md5'
+import config from '../config'
 
-http.defaults.baseURL = 'https://www.baidu.com'
+http.defaults.baseURL = config.api
 
-const ekey = 'REPLACE_YOUR_SECRET_KEY'
+const ekey = config.ekey
 
 const dekey = String.fromCharCode
   .apply(undefined, ekey.split('')
-  .map(i => i.charCodeAt(0))
-  .map((i, index) => i - index))
+  .map((i: string) => i.charCodeAt(0))
+  .map((i: number, index: number) => i - index))
 
 type ReqOpt = {
     full?: boolean,

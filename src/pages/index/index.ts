@@ -13,7 +13,7 @@ Page(new class extends PageClass<Data> {
   }
   onLoad() {
     // tslint:disable-next-line
-    console.log('Onload', app)
+    console.log('index page onLoad, app:', app)
     request({
       url: '/test',
     }).then(e => {
