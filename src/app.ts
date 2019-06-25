@@ -1,5 +1,5 @@
 import config from './config'
-import { AppComponent } from './utils/midi';
+import {AppComponent} from './utils/midi'
 
 class MyApp extends AppComponent<any>{
 
