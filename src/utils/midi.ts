@@ -1,3 +1,5 @@
+import { omit } from './util'
+
 let store: Store
 const STORE_CHANGE_KEY = 'storechange'
 
@@ -21,16 +23,6 @@ function shallowEqual(o1: object, o2: object): boolean {
     }
     return true
   })
-}
-
-function omit<T>(o: T, ...names: string[]): Partial<T> {
-  return Object.getOwnPropertyNames(o).reduce((target: any, key) => {
-    if (names.indexOf(key) === -1) {
-      target[key] = (<any>o)[key]
-    }
-    return target
-  // tslint:disable-next-line
-  }, <T>{})
 }
 
 function getValueByNamespace(target: any, namespace: string): any {

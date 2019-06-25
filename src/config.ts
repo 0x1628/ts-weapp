@@ -2,7 +2,7 @@
  * 项目配置信息
  * 注意：需要修改 env 变量，可选值：env 或 prod
  */
-import { omit } from './utils/midi'
+import { omit } from './utils/util'
 
 const env = 'dev'
 
