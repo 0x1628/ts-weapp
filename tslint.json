@@ -1,3 +1,10 @@
 {
-  "extends": "@fragment0/tslint-config"
+  "extends": "@fragment0/tslint-config",
+  "linterOptions": {
+    "exclude": [
+      "node_modules",
+      "*.d.ts",
+      "/dist/**/*"
+    ]
+  }
 }

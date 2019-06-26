@@ -4,21 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently 'npm:watch-js' 'npm:watch-css' 'npm:watch-other'",
+    "start": "concurrently 'npm:watch-js' 'npm:watch-css' 'npm:watch-other'",
     "watch-js": "tsc -w",
     "watch-css": "postcss src/**/*.css --base src --dir dist --ext wxss --watch",
     "watch-other": "node scripts/cpx.js",
     "test": "tslint -p .",
     "adds": "node scripts/add.js $1 $2"
   },
-  "author": "",
+  "author": "fragment0",
   "license": "ISC",
   "devDependencies": {
     "@fragment0/tslint-config": "^0.1.1",
     "@types/node": "^10.5.4",
     "concurrently": "^3.6.1",
     "cpx": "^1.5.0",
-    "postcss-apply": "^0.10.0",
+    "husky": "^2.5.0",
+    "postcss-apply": "^0.12.0",
     "postcss-calc": "^6.0.1",
     "postcss-cli": "^6.0.0",
     "postcss-custom-media": "^6.0.0",
@@ -29,5 +30,10 @@
     "postcss-nesting": "^6.0.0",
     "tslint": "^5.11.0",
     "typescript": "^3.4.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tslint -p . && node ./scripts/page loop"
+    }
   }
 }
