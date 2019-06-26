@@ -7,9 +7,10 @@
     "start": "concurrently 'npm:watch-js' 'npm:watch-css' 'npm:watch-other'",
     "watch-js": "tsc -w",
     "watch-css": "postcss src/**/*.css --base src --dir dist --ext wxss --watch",
-    "watch-other": "node scripts/cpx.js",
+    "watch-other": "node scripts/cpx.js watch",
     "test": "tslint -p .",
-    "adds": "node scripts/add.js $1 $2"
+    "adds": "node scripts/add.js $1 $2",
+    "build": "postcss src/**/*.css --base src --dir dist --ext wxss && tsc && node scripts/cpx.js copy"
   },
   "author": "fragment0",
   "license": "ISC",
