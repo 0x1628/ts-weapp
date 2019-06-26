@@ -63,7 +63,7 @@ $ cd ./YOUR_PROJECT_NAME
 
 $ npm i
 
-# 按需修改 config.ts 文件中的配置信息
+# 按需修改 config.ts 文件中的配置信息、按需修改 package.json 与 scripts/cpx.js 文件中后缀枚举值
 
 $ npm run start
 ```

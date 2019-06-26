@@ -10,7 +10,7 @@
     "watch-other": "node scripts/cpx.js",
     "test": "tslint -p .",
     "adds": "node scripts/add.js $1 $2",
-    "build": "postcss src/**/*.css --base src --dir dist --ext wxss && tsc && cpx 'src/**/*.{wxml,wxs,png,jpg,json,svg,js,mp3}' dist "
+    "build": "postcss src/**/*.css --base src --dir dist --ext wxss && tsc && cpx 'src/**/*.{wxml,wxs,png,jpg,json,svg,js}' dist "
   },
   "author": "fragment0",
   "license": "ISC",
