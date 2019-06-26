@@ -1,8 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 
-const appJSONObject = require('../src/app.json')
-
 const projectPath = process.cwd()
 
 /**
@@ -10,6 +8,8 @@ const projectPath = process.cwd()
  * @param  {string} pageName 页面名称
  */
 const checkIsExist = pageName => {
+    const appJSONObject = require('../src/app.json')
+
     // 检查是否存在于 app.json 文件
     if (!pageName) return true
 
@@ -27,6 +27,8 @@ const Commands = {
     add(pageName) {
         // 若不存在，则写入
         if (!checkIsExist(pageName)) {
+            const appJSONObject = require('../src/app.json')
+
             fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
                 ...appJSONObject,
                 pages: appJSONObject.pages.concat(`pages/${pageName}/${pageName}`)
@@ -40,6 +42,8 @@ const Commands = {
      */
     remove(pageName) {
         if (checkIsExist(pageName)) {
+            const appJSONObject = require('../src/app.json')
+
             // 页面存在于 app.json 文件
             fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
                 ...appJSONObject,
@@ -51,6 +55,7 @@ const Commands = {
      * 遍历 pages 目录并更新 app.json 文件
      */
     loop() {
+        const appJSONObject = require('../src/app.json')
         const pageFolderPath = path.resolve(projectPath, 'src', 'pages')
         const dirs = getDirs(pageFolderPath).map(dirName => `pages/${dirName}/${dirName}`)
 
