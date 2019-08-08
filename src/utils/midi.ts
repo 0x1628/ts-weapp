@@ -151,6 +151,7 @@ interface ComponentClass<T, P = {}> {
   ready?(): void
   moved?(): void
   detached?(): void
+  triggerEvent(eventName: string, ...rest: any[]): void
 }
 class ComponentClass<T, P = {}> {
 
