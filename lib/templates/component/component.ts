@@ -1,4 +1,4 @@
-import {ComponentClass} from '../../../src/utils/midi'
+import {ComponentClass} from '../..//utils/midi'
 
 type Data = {
   name: string,
