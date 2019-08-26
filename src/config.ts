@@ -1,7 +1,3 @@
-/**
- * 项目配置信息
- * 注意：需要修改 env 变量，可选值：env 或 prod
- */
 import { omit } from './utils/util'
 
 const env = 'dev'
@@ -22,7 +18,6 @@ config = {
   ...config,
 }
 
-// 移除不必要的属性
 config = omit(config, 'dev', 'prod')
 
 export default config

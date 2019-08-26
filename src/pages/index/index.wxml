@@ -1,3 +1,1 @@
-<view class="page-index">
-  Hello {{name}}
-</view>
+<view class="container">Hello {{name}}</view>

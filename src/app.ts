@@ -1,7 +1,7 @@
 import config from './config'
 import {AppComponent} from './utils/midi'
 
-class MyApp extends AppComponent<any>{
+App(new class extends AppComponent<any>{
 
   globalData: any = {
     config,
@@ -22,6 +22,4 @@ class MyApp extends AppComponent<any>{
   onError(msg: any) {
     console.error(msg)
   }
-}
-
-App(new MyApp())
+}())

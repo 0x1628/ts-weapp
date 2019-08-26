@@ -1,3 +1,1 @@
-<view class="component-container">
-    这是组件页面，你应当修改其顶层样式名称。
-</view>
+<view class="wrapper">Component Created Successfully</view>
