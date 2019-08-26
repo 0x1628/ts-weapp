@@ -32,7 +32,7 @@ const Commands = {
             fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
                 ...appJSONObject,
                 pages: appJSONObject.pages.concat(`pages/${pageName}/${pageName}`)
-            }), 'utf8')
+            }, null, 2), 'utf8')
         }
     },
 
@@ -48,7 +48,7 @@ const Commands = {
             fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
                 ...appJSONObject,
                 pages: appJSONObject.pages.filter(path => !path.endsWith('/' + pageName))
-            }), 'utf8')
+            }, null, 2), 'utf8')
         }
     },
     /**
@@ -62,7 +62,7 @@ const Commands = {
         fs.writeFileSync(path.resolve(projectPath, 'src', 'app.json'), JSON.stringify({
             ...appJSONObject,
             pages: Array.from(appJSONObject.pages).filter(path => dirs.includes(path))
-        }), 'utf8')
+        }, null, 2), 'utf8')
     }
 }
 
