@@ -9,7 +9,6 @@ module.exports = {
       },
     }),
     require('postcss-apply')(),
-    require('postcss-calc')(),
     require('postcss-custom-media')(),
     require('postcss-custom-properties')({
       preserve: false,
