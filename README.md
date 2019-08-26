@@ -104,7 +104,7 @@ type Data = {
   age: number,
 }
 
-class IndexPage extends PageClass<Data> {
+Page(new class extends PageClass<Data> {
   getInitialData() {
     return {
       name: 'fragment0'
@@ -124,9 +124,7 @@ class IndexPage extends PageClass<Data> {
       name: 123123
     })
   }
-}
-
-Page(new IndexPage)
+}())
 ```
 
 ### ComponentClass
@@ -145,7 +143,7 @@ type Properties = {
   show: boolean,
 }
 
-class ButtonComponent extends ComponentClass<Data, Properties> {
+Component(new class extends ComponentClass<Data, Properties> {
   getInitialData() {
     return {
       name: 'fragment0'
@@ -172,7 +170,7 @@ class ButtonComponent extends ComponentClass<Data, Properties> {
   logSth() {
     console.log(this.data.name, this.properties.show)
   }
-}
+}())
 ```
 
 ### 状态管理
