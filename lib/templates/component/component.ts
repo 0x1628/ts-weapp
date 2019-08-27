@@ -1,15 +1,22 @@
 import {ComponentClass} from '../../utils/midi'
 
 type Data = {
-  name: String,
+  name: string,
 }
 
-Component(new class extends ComponentClass<Data> {
-  properties: any = {}
+type Properties = {
+  nickname: PropertyOption,
+}
+
+Component(new class extends ComponentClass<Data, Properties> {
+  properties: Properties = {
+    nickname: {
+      type: String,
+      value: '',
+    },
+  }
 
   data: Data = {
     name: '',
   }
-
-  methods: {}
 }())
