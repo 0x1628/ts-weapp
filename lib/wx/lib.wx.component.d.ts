@@ -37,7 +37,7 @@ declare interface PropertyOption {
     oldVal?: any,
     changedPath?: Array<string | number>,
   ): void;
-  optionalTypes: PropertyType[];
+  optionalTypes?: PropertyType[];
 }
 
 declare interface TriggerEventOption {
@@ -66,7 +66,7 @@ declare interface WxComponent extends BaseComponent {
   /** 节点dataset */
   dataset: string;
   /** 组件数据，**包括内部数据和属性值** */
-  data: object;
+  data: IAnyObject;
   /** 组件数据，**包括内部数据和属性值**（与 `data` 一致） */
   properties: {
     [propertyName: string]: PropertyOption;
@@ -80,9 +80,9 @@ declare interface WxComponent extends BaseComponent {
      *
      * 其中 `key` 可以以数据路径的形式给出，支持改变数组中的某一项或对象的某个属性，如 `array[2].message`，`a.b.c.d`，并且不需要在 this.data 中预先定义。
      */
-    data: object,
+    data: IAnyObject,
     /** setData引起的界面更新渲染完毕后的回调函数，最低基础库： `1.5.0` */
-    callback?: (data: object) => void,
+    callback?: (data: IAnyObject) => void,
   ): void;
   /** 检查组件是否具有 `behavior` （检查时会递归检查被直接或间接引入的所有behavior） */
   hasBehavior(behavior: object): void;
@@ -168,9 +168,9 @@ declare interface BaseComponent extends ComponentLifetimes {
     [propertyName: string]: PropertyOption;
   };
   /** 组件的内部数据，和 `properties` 一同用于组件的模板渲染 */
-  data?: object;
+  data?: IAnyObject;
   /** 组件数据字段监听器，用于监听 properties 和 data 的变化 */
-  observers?: object;
+  observers?: IAnyObject;
   /** object组件的方法，包括事件响应函数和任意的自定义方法，关于事件响应函数的使用，参见 [组件事件](events.md) */
   methods?: {
     [methodName: string]: (this: WxComponent) => any;
