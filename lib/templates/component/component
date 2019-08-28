@@ -8,7 +8,7 @@ type Properties = {
   nickname: PropertyOption,
 }
 
-Component(new class extends ComponentClass<Data, Properties> {
+class {{name}}Component extends ComponentClass<Data, Properties> {
   properties: Properties = {
     nickname: {
       type: String,
@@ -19,4 +19,6 @@ Component(new class extends ComponentClass<Data, Properties> {
   data: Data = {
     name: '',
   }
-}())
+}
+
+Component(new {{name}}Component())

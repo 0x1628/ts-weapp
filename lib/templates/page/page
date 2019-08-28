@@ -4,9 +4,11 @@ type Data = {
   name: string,
 }
 
-Page(new class extends PageClass<Data> {
+class {{name}}Page extends PageClass<Data> {
   data: Data = {
     name: '',
   }
   onLoad() {}
-}())
+}
+
+Page(new {{name}}Page())

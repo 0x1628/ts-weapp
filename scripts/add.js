@@ -29,6 +29,9 @@ function ensureFolder(target) {
   })
 }
 
+// xxx-yyy-zzz => XxxYyyZzz
+const classNameConverter = str => str.split('-').map(item => item.toLowerCase().replace(/( |^)[a-z]/g, firstLetter => firstLetter.toUpperCase())).join('')
+
 const Commands = {
   page(pageName) {
     if (!pageName) {
@@ -40,7 +43,15 @@ const Commands = {
       const sourceFiles = fs.readdirSync(sourceFolder)
       sourceFiles.forEach((source) => {
         const ext = source.split('.').pop()
-        fs.copyFileSync(path.resolve(sourceFolder, source), path.resolve(pageFolder, `${pageName}.${ext}`))
+        if (ext === 'page') {
+          const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'page', 'page'), {
+            encoding: 'utf-8'
+          }).replace(/{{name}}/g, classNameConverter(pageName))
+          fs.writeFileSync(path.resolve(pageFolder, `${pageName}.ts`), templateData, 'utf-8')
+        } else {
+          fs.copyFileSync(path.resolve(sourceFolder, source), path.resolve(pageFolder, `${pageName}.${ext}`))
+        }
+
         // 追加 pageName 到 app.json
         child_process.execFile('node', [__dirname + '/page.js', 'add', pageName], (error, stdout, stderr) => {
           if (error) {
@@ -63,7 +74,14 @@ const Commands = {
       const sourceFiles = fs.readdirSync(sourceFolder)
       sourceFiles.forEach((source) => {
         const ext = source.split('.').pop()
-        fs.copyFileSync(path.resolve(sourceFolder, source), path.resolve(componentFolder, `${componentName}.${ext}`))
+        if (ext === 'component') {
+          const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'component', 'component'), {
+            encoding: 'utf-8'
+          }).replace(/{{name}}/g, classNameConverter(componentName))
+          fs.writeFileSync(path.resolve(componentFolder, `${componentName}.ts`), templateData, 'utf-8')
+        } else {
+          fs.copyFileSync(path.resolve(sourceFolder, source), path.resolve(componentFolder, `${componentName}.${ext}`))
+        }
       })
       console.log(`Add component ${componentName} success`)
     }).catch(e => console.error(e))
@@ -88,7 +106,7 @@ if (commands.has(cmd)) {
 if (new Set(['--help', '-h']).has(cmd)) {
   console.log(`
     Usage
-      $ adds <command>
+      $ node ./add.js <command>
 
     Available commands
       ${Array.from(commands).join(', ')}
