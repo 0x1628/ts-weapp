@@ -80,13 +80,12 @@ $ npm run start
 
 ### 根据模板创建 Page 或 Component
 
+```bash
+$ npm run add-page PAGE_NAME
+$ npm run add-component COMPONENT_NAME
 ```
-# COMMAND 可选 page 或 component
 
-npm run adds COMMAND PAGE_OR_COMPONENT_NAME
-```
-
-通过模板创建 `page` 或 `component`。注意：添加 `page` 后请手动将新页面路径添加至 `app.json`。
+通过模板创建 `page` 或 `component`。
 
 ## midi
 
