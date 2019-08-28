@@ -7,7 +7,7 @@ type Data = {
 
 const app = getApp()
 
-Page(new class extends PageClass<Data> {
+class IndexPage extends PageClass<Data> {
   data: Data = {
     name: 'fragment0',
   }
@@ -23,4 +23,6 @@ Page(new class extends PageClass<Data> {
       console.error('request error', e)
     })
   }
-}())
+}
+
+Page(new IndexPage())

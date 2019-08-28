@@ -4,20 +4,19 @@ type Data = {
   name: string,
 }
 
-type Properties = {
-  nickname: PropertyOption,
-}
-
-class {{name}}Component extends ComponentClass<Data, Properties> {
-  properties: Properties = {
-    nickname: {
+class {{name}}Component extends ComponentClass<Data> {
+  properties = {
+    mockProperty: {
       type: String,
       value: '',
+      observer: (newVal: string, oldVal: string) => {
+        console.log({newVal, oldVal})
+      },
     },
   }
 
   data: Data = {
-    name: '',
+    mockData: '',
   }
 }
 
