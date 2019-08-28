@@ -1,7 +1,7 @@
 import {ComponentClass} from '../../utils/midi'
 
 type Data = {
-  name: string,
+  mockData: string,
 }
 
 class {{name}}Component extends ComponentClass<Data> {
