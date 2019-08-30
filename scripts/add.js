@@ -43,8 +43,8 @@ const Commands = {
       const sourceFiles = fs.readdirSync(sourceFolder)
       sourceFiles.forEach((source) => {
         const ext = source.split('.').pop()
-        if (ext === 'page') {
-          const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'page', 'page'), {
+        if (ext === 'tpl') {
+          const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'page', source), {
             encoding: 'utf-8'
           }).replace(/#{name}/g, classNameConverter(pageName))
           fs.writeFileSync(path.resolve(pageFolder, `${pageName}.ts`), templateData, 'utf-8')
@@ -74,8 +74,8 @@ const Commands = {
       const sourceFiles = fs.readdirSync(sourceFolder)
       sourceFiles.forEach((source) => {
         const ext = source.split('.').pop()
-        if (ext === 'component') {
-          const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'component', 'component'), {
+        if (ext === 'tpl') {
+          const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'component', source), {
             encoding: 'utf-8'
           }).replace(/#{name}/g, classNameConverter(componentName))
           fs.writeFileSync(path.resolve(componentFolder, `${componentName}.ts`), templateData, 'utf-8')
