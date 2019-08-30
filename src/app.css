@@ -1,22 +1,23 @@
 @import "./var.config.css";
 
 page {
-  font-size: var(--primary-font-size);
+  font-size: var(--font-size-base);
   font-family: -apple-system-font, "Helvetica Neue", sans-serif;
   overflow-x: hidden;
   position: relative;
   height: 100%;
   width: 100vw;
   line-height: 1;
-  /* NOTE: 仅在真机生效 */
-  padding-bottom: env(safe-area-inset-bottom);
 }
 
 page,
 view,
 text,
-scroll-view {
+scroll-view,
+navigator {
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 ::-webkit-scrollbar {
@@ -28,7 +29,10 @@ scroll-view {
 button {
   border-radius: 0;
   padding: 0;
-  font-size: var(--primary-font-size);
+  font-size: var(--font-size-base);
+  margin: 0;
+  line-height: 1;
+  background: transparent;
 }
 
 button::after {
