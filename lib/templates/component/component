@@ -4,7 +4,7 @@ type Data = {
   mockData: string,
 }
 
-class {{name}}Component extends ComponentClass<Data> {
+class #{name}Component extends ComponentClass<Data> {
   properties = {
     mockProperty: {
       type: String,
@@ -20,4 +20,4 @@ class {{name}}Component extends ComponentClass<Data> {
   }
 }
 
-Component(new {{name}}Component())
+Component(new #{name}Component())

@@ -46,7 +46,7 @@ const Commands = {
         if (ext === 'page') {
           const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'page', 'page'), {
             encoding: 'utf-8'
-          }).replace(/{{name}}/g, classNameConverter(pageName))
+          }).replace(/#{name}/g, classNameConverter(pageName))
           fs.writeFileSync(path.resolve(pageFolder, `${pageName}.ts`), templateData, 'utf-8')
         } else {
           fs.copyFileSync(path.resolve(sourceFolder, source), path.resolve(pageFolder, `${pageName}.${ext}`))
@@ -77,7 +77,7 @@ const Commands = {
         if (ext === 'component') {
           const templateData = fs.readFileSync(path.resolve(base, 'lib', 'templates', 'component', 'component'), {
             encoding: 'utf-8'
-          }).replace(/{{name}}/g, classNameConverter(componentName))
+          }).replace(/#{name}/g, classNameConverter(componentName))
           fs.writeFileSync(path.resolve(componentFolder, `${componentName}.ts`), templateData, 'utf-8')
         } else {
           fs.copyFileSync(path.resolve(sourceFolder, source), path.resolve(componentFolder, `${componentName}.${ext}`))
