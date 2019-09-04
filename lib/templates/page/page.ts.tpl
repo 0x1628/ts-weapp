@@ -1,8 +1,10 @@
+import {PageClass} from '../../utils/midi'
+
 type Data = {
   name: string,
 }
 
-class #{name}Page {
+class #{name}Page extends PageClass<Data> {
   data: Data = {
     name: '',
   }

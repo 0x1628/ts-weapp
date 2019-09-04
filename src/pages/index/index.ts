@@ -1,3 +1,4 @@
+import {PageClass} from '../../utils/midi'
 import request from '../../utils/request'
 
 type Data = {
@@ -6,7 +7,7 @@ type Data = {
 
 const app = getApp()
 
-class IndexPage {
+class IndexPage extends PageClass<Data> {
   data: Data = {
     name: 'fragment0',
   }
