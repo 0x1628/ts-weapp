@@ -14,7 +14,8 @@ page,
 view,
 text,
 scroll-view,
-navigator {
+navigator,
+.view {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
