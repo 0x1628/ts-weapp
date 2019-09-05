@@ -130,7 +130,7 @@ class PageClass<T, C extends WrappedActionMap = {}> {
       (<any>this)[method] = this.constructor.prototype[method]
     })
   }
-  setData(data: Partial<T>, callback?: () => any): void {
+  setData(data: Partial<T>, callback?: () => void): void {
     // nothing
   }
   onUpdate() {
@@ -181,7 +181,7 @@ class ComponentClass<T, P = {}> {
       this.methods[method] = this.constructor.prototype[method]
     })
   }
-  setData(data: Partial<T>): void {
+  setData(data: Partial<T>, callback?: () => void): void {
     // nothing
   }
   transformProperties(arg: any): P {
